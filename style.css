@@ -1,0 +1,81 @@
+/* Futuristic single-page — Fast Consultant
+   Save as style.css and keep images/logo.png available
+*/
+
+:root{
+  --bg-dark:#07070a;
+  --glass: rgba(255,255,255,0.04);
+  --muted: #bfc9d3;
+  --accent1: #6EE7F3; /* cyan */
+  --accent2: #8B5CF6; /* purple */
+  --gold: #ffd166;
+  --card-shadow: 0 10px 40px rgba(11,11,13,0.6);
+  --maxw: 1200px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, Poppins, system-ui;background:var(--bg-dark);color:var(--muted);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+a{color:inherit}
+
+/* Canvas layers cover */
+canvas#bg-gradient, canvas#particles{position:fixed;inset:0;width:100%;height:100%;display:block}
+
+/* Header / Nav */
+.nav{position:fixed;left:50%;transform:translateX(-50%);top:18px;z-index:50;width:calc(100% - 40px);max-width:var(--maxw);display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.04)}
+.brand{display:flex;align-items:center;gap:12px}
+.logo-img{height:46px;width:46px;border-radius:8px;object-fit:cover;filter:drop-shadow(0 6px 18px rgba(139,92,246,0.15))}
+.brand-text .title{font-weight:700;color:var(--gold);letter-spacing:0.4px}
+.brand-text .subtitle{font-size:12px;color:#9aa7b3}
+
+/* center navigation */
+.nav-links{display:flex;gap:22px;align-items:center}
+.nav-links a{padding:8px 12px;border-radius:10px;color:var(--muted);text-decoration:none;font-weight:600;transition:all .22s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent1);transform:translateY(-3px);text-shadow:0 6px 30px rgba(110,231,243,0.06)}
+
+/* Main layout */
+main{max-width:var(--maxw);margin:140px auto 80px;padding:0 20px;position:relative;z-index:40}
+
+/* Hero */
+.hero{min-height:78vh;display:grid;place-items:center}
+.hero-inner{width:100%}
+.hero-inner .headline{font-size:2.2rem;color:#fff;margin:0 0 12px;line-height:1.05;text-shadow:0 6px 30px rgba(0,0,0,0.6)}
+.lead{color:#cbd5e1;max-width:900px;margin:0 auto 18px}
+.cta-row{display:flex;gap:14px;justify-content:center;margin-top:18px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;font-weight:700;border:0;cursor:pointer;text-decoration:none}
+.btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#06121a;box-shadow:0 10px 30px rgba(139,92,246,0.12)}
+.btn.outline{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+.type-rotator{height:20px;margin-top:22px;display:flex;align-items:center;justify-content:center;gap:10px;opacity:0.95;color:var(--muted);font-weight:600}
+
+/* Sections */
+.section{margin-top:40px;padding:40px 20px}
+.section-title{font-size:1.4rem;color:var(--accent2);margin-bottom:14px}
+.glass{background:var(--glass);border-radius:14px;padding:28px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--card-shadow)}
+
+/* Services cards */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);transition:transform .36s ease, box-shadow .36s;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.card h3{color:#fff;margin:0}
+.card p{color:#bfc9d3;font-size:0.95rem;margin:0}
+.card .card-icon{font-size:22px;display:inline-flex;align-items:center;justify-content:center;padding:8px;border-radius:10px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#02121a;margin-bottom:6px}
+.card:hover{transform:translateY(-10px);box-shadow:0 20px 50px rgba(0,0,0,0.6), 0 8px 30px rgba(110,231,243,0.06)}
+
+/* About / contact layout */
+.about-text{max-width:900px;margin:0 auto;color:#cbd5e1}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.contact-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+
+/* footer */
+.footer{text-align:center;padding:24px;color:#9aa7b3}
+
+/* small screens */
+@media (max-width:1000px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .contact-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:640px){
+  .nav{left:8px;transform:none;width:calc(100% - 16px);padding:10px}
+  main{margin:120px 16px 60px}
+  .cards{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .brand-text .subtitle{display:none}
+}
