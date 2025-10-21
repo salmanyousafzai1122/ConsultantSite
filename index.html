@@ -6,6 +6,8 @@
   <title>Fast Consultant</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="script.js"></script>
 <body>
   <!-- Canvas layers for animated background -->
   <canvas id="floatLight"></canvas>
@@ -92,27 +94,25 @@
 
     <!-- CONTACT -->
     <section id="contact" class="section glass contact-section">
-      <h2 class="section-title">Contact</h2>
+  <h2 class="section-title">Contact Us</h2>
 
-      <div class="contact-grid">
-        <div class="contact-card">
-          <h4>Get in touch</h4>
-          <p><strong>Phone:</strong> 051-8739949</p>
-          <p><strong>Mobile:</strong> +92 311-9334060, +92 343-7989095</p>
-          <p><strong>Email:</strong> <a href="mailto:salmanyousafzai1122@gmail.com">salmanyousafzai1122@gmail.com</a></p>
-        </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h4>Get In Touch</h4>
+      <p>We’d love to hear from you! Please fill out the form below.</p>
+      <p><strong>Email:</strong> salmanyousafzai580@gmail.com</p>
+    </div>
 
-        <form class="contact-form" id="contactForm">
-          <label class="sr-only" for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required/>
-          <label class="sr-only" for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="Your email" required/>
-          <label class="sr-only" for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
-          <button type="submit" class="btn primary">Send Message</button>
-        </form>
-      </div>
-    </section>
+    <!-- ✅ Working EmailJS Form -->
+    <form id="contactForm" class="contact-form">
+      <input type="text" name="from_name" placeholder="Your Name" required>
+      <input type="email" name="from_email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit" class="btn primary">Send Message</button>
+    </form>
+  </div>
+</section>
+
   </main>
 
   <footer class="footer">
@@ -120,5 +120,8 @@
   </footer>
 
   <script src="script.js"></script>
+  <!-- Toast Container -->
+<div id="toast"></div>
+
 </body>
 </html>
