@@ -3,51 +3,61 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fast Consultant — Futuristic</title>
+  <title>Fast Consultant</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Canvas layers -->
-  <canvas id="bg-gradient"></canvas>
+  <!-- Canvas layers for animated background -->
+  <canvas id="floatLight"></canvas>
   <canvas id="particles"></canvas>
 
-  <!-- Page content -->
-  <header class="nav glass">
+  <!-- Header / Nav -->
+  <header class="nav">
     <div class="brand">
-      <img src="logo.png" alt="Fast Consultant Logo" class="logo-img" />
+      <img src="images/logo.png" alt="Fast Consultant Logo" class="logo" onerror="this.style.display='none'"/>
       <div class="brand-text">
-        <div class="title">Fast <span>Consultant</span></div>
-        <div class="subtitle">Financial • Tax • Management</div>
+        <div class="company">Fast <span>Consultant</span></div>
+        <div class="tag">Financial • Tax • Management</div>
       </div>
     </div>
 
     <nav class="nav-links">
       <a href="#home" class="active">Home</a>
-      <a href="#services">Services</a>
       <a href="#about">About</a>
+      <a href="#services">Services</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main>
     <!-- HERO -->
-    <section id="home" class="hero">
-      <div class="hero-inner glass">
-        <h1 class="headline">Your Partner in Strategic Growth & Digital Transformation.</h1>
-        <p class="lead">We help companies grow with speed, precision, and innovation — offering tailored consulting strategies that turn challenges into opportunities. From digital transformation to operational excellence, we make your business future-ready.</p>
+    <section id="home" class="section hero glass">
+      <div class="hero-inner">
+        <h1 class="headline">Empower. Comply. Grow.</h1>
+        <p id="typewriter" class="lead"></p>
 
-        <div class="cta-row">
-          <a class="btn primary" href="#services">Explore Services</a>
-          <a class="btn outline" href="#contact">Get in Touch</a>
+        <div class="hero-ctas">
+          <a class="btn primary" href="#services">Our Services</a>
+          <a class="btn outline" href="#contact">Contact Us</a>
         </div>
 
-        <div class="type-rotator" aria-hidden="true">
-          <span class="rot-phrase">PEC Registrations</span>
-          <span class="rot-phrase">SECP & Company Setup</span>
-          <span class="rot-phrase">FBR & Tax Filings</span>
-          <span class="rot-phrase">Audit & Reports</span>
+        <div class="rotator" aria-hidden="true">
+          <span>PEC Registration</span>
+          <span>SECP & Company Setup</span>
+          <span>FBR & Tax Filing</span>
+          <span>Audit & Reports</span>
         </div>
       </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section glass">
+      <h2 class="section-title">About Fast Consultant</h2>
+      <p class="about-text">
+        Fast Consultant provides fast, accurate and compliant consultancy for businesses and professionals.
+        We combine modern tools, expert guidance and regulatory know-how to simplify registration,
+        tax filing and audit workflows so you can focus on growth.
+      </p>
     </section>
 
     <!-- SERVICES -->
@@ -55,59 +65,52 @@
       <h2 class="section-title">Our Services</h2>
       <div class="cards">
         <article class="card">
-          <div class="card-icon">🏷️</div>
+          <div class="icon">🏷️</div>
           <h3>Registrations</h3>
-          <p>PEC, SECP, Sole Proprietor, Chamber, FBR — end-to-end setup.</p>
+          <p>PEC, SECP, Sole Proprietor, Chamber, FBR — end-to-end setup and compliance.</p>
         </article>
 
         <article class="card">
-          <div class="card-icon">🧾</div>
-          <h3>Audit & Reports</h3>
-          <p>Accurate audits, compliant reports and clean account management.</p>
+          <div class="icon">🧾</div>
+          <h3>Audit & Accounts</h3>
+          <p>Accurate audits, compliant reports and clean bookkeeping.</p>
         </article>
 
         <article class="card">
-          <div class="card-icon">⚖️</div>
+          <div class="icon">📨</div>
           <h3>Notice Replies</h3>
           <p>Professional handling of notices, objections and regulatory responses.</p>
         </article>
 
         <article class="card">
-          <div class="card-icon">📊</div>
+          <div class="icon">📊</div>
           <h3>Management Consulting</h3>
           <p>Financial planning, process improvement and corporate governance.</p>
         </article>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section glass">
-      <h2 class="section-title">About Fast Consultant</h2>
-      <p class="about-text">Fast Consultant is a modern business consulting firm focused on helping startups and enterprises achieve faster results through smart strategies and cutting-edge solutions.
-
-Our team of experts blends innovation, analytics, and experience to deliver measurable outcomes. Whether you need to streamline operations, improve performance, or transform your digital presence — we partner with you to move your business forward efficiently.
-
-We believe in speed with strategy, helping clients achieve sustainable growth without compromise on quality.</p>
-    </section>
-
     <!-- CONTACT -->
-    <section id="contact" class="section glass">
+    <section id="contact" class="section glass contact-section">
       <h2 class="section-title">Contact</h2>
+
       <div class="contact-grid">
         <div class="contact-card">
-          <h4>Call</h4>
-          <p>051-8739949</p>
-          <p>+92 311 9334060</p>
-          <p>+92 343 7989095</p>
+          <h4>Get in touch</h4>
+          <p><strong>Phone:</strong> 051-8739949</p>
+          <p><strong>Mobile:</strong> +92 311-9334060, +92 343-7989095</p>
+          <p><strong>Email:</strong> <a href="mailto:salmanyousafzai1122@gmail.com">salmanyousafzai1122@gmail.com</a></p>
         </div>
-        <div class="contact-card">
-          <h4>Email</h4>
-          <p><a href="mailto:salmanyousafzai1122@gmail.com">salmanyousafzai1122@gmail.com</a></p>
-        </div>
-        <div class="contact-card">
-          <h4>Office</h4>
-          <p>Islamabad, Pakistan</p>
-        </div>
+
+        <form class="contact-form" id="contactForm">
+          <label class="sr-only" for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required/>
+          <label class="sr-only" for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="Your email" required/>
+          <label class="sr-only" for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
+          <button type="submit" class="btn primary">Send Message</button>
+        </form>
       </div>
     </section>
   </main>

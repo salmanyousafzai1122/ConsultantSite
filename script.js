@@ -1,12 +1,6 @@
-/* Futuristic animated background + particles + UI interactions
-   Save as script.js
-*/
-
-// update year
+// ===== utilities =====
 document.getElementById('year')?.textContent = new Date().getFullYear();
-
-// Smooth link behavior and active class
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
+document.querySelectorAll('.nav-links a').forEach(a=>{
   a.addEventListener('click', e=>{
     e.preventDefault();
     document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth', block:'start'});
@@ -15,147 +9,94 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
-/* Canvas: animated gradient wave background (bg-gradient) */
-const bg = document.getElementById('bg-gradient');
-const p = document.getElementById('particles');
-
-function fitCanvas(c){
-  c.width = innerWidth;
-  c.height = innerHeight;
-}
-fitCanvas(bg);
-fitCanvas(p);
-window.addEventListener('resize', ()=>{ fitCanvas(bg); fitCanvas(p); });
-
-const bgCtx = bg.getContext('2d');
-const pCtx = p.getContext('2d');
-
-let t = 0;
-function drawGradientBg(){
-  const w = bg.width, h = bg.height;
-  t += 0.002;
-  // animated multicolor gradient
-  const grad = bgCtx.createLinearGradient(0, 0, w, h);
-  const a = Math.sin(t*1.2)*0.5 + 0.5;
-  const b = Math.sin(t*0.7 + 1)*0.5 + 0.5;
-  grad.addColorStop(0, `rgba(11,11,14,${0.98 - a*0.05})`);
-  grad.addColorStop(0.35, `rgba(11,60,120,${0.9 - b*0.08})`);
-  grad.addColorStop(0.65, `rgba(140,60,240,${0.85 - a*0.06})`);
-  grad.addColorStop(1, `rgba(20,10,40,${0.9 - b*0.05})`);
-  bgCtx.fillStyle = grad;
-  bgCtx.fillRect(0,0,w,h);
-
-  // subtle moving lines (parallax waves)
-  bgCtx.globalCompositeOperation = 'lighter';
-  for(let i=0;i<6;i++){
-    bgCtx.beginPath();
-    const yPhase = Math.sin(t*1.2 + i)*20;
-    bgCtx.moveTo(0, h*0.2 + i* (h*0.1) );
-    for(let x=0;x<w;x+=20){
-      const y = h*0.2 + i*(h*0.1) + Math.sin((x*0.008) + (t*2) + i)*40;
-      bgCtx.lineTo(x,y + yPhase);
-    }
-    bgCtx.strokeStyle = `rgba(120,200,255,${0.02 + i*0.006})`;
-    bgCtx.lineWidth = 1;
-    bgCtx.stroke();
+// ===== typewriter for hero text =====
+const typeText = "We help companies grow with speed, precision, and innovation — tailored consulting that turns challenges into opportunities.";
+(function typewriter(){
+  const el = document.getElementById('typewriter');
+  if(!el) return;
+  let i = 0;
+  function tick(){
+    if(i <= typeText.length){ el.textContent = typeText.slice(0,i++); setTimeout(tick, 22); }
   }
-  bgCtx.globalCompositeOperation = 'source-over';
-  requestAnimationFrame(drawGradientBg);
-}
-drawGradientBg();
+  tick();
+})();
 
-/* Particles layer */
-const particles = [];
-const PARTICLE_COUNT = Math.round((innerWidth*innerHeight)/80000)*30; // responsive
+// ===== animated float light canvas =====
+const lightCanvas = document.getElementById('floatLight');
+const pCanvas = document.getElementById('particles');
+function fit(c){ c.width = innerWidth; c.height = innerHeight; }
+fit(lightCanvas); fit(pCanvas);
+window.addEventListener('resize', ()=>{ fit(lightCanvas); fit(pCanvas); initParticles(); });
+
+const lctx = lightCanvas.getContext('2d');
+const pctx = pCanvas.getContext('2d');
+
+// floating soft light blob (subtle)
+let t = 0;
+function drawLightBg(){
+  t += 0.002;
+  const w = lightCanvas.width, h = lightCanvas.height;
+  lctx.clearRect(0,0,w,h);
+  // two soft radial glows that drift slowly
+  const grad1 = lctx.createRadialGradient(w*0.15 + Math.sin(t*2)*60, h*0.2 + Math.cos(t*1.5)*40, 50, w*0.15, h*0.2, Math.max(w,h));
+  grad1.addColorStop(0, 'rgba(0,214,255,0.08)');
+  grad1.addColorStop(0.45, 'rgba(0,214,255,0.02)');
+  grad1.addColorStop(1, 'transparent');
+  lctx.fillStyle = grad1;
+  lctx.fillRect(0,0,w,h);
+
+  const grad2 = lctx.createRadialGradient(w*0.8 + Math.cos(t*1.3)*80, h*0.8 + Math.sin(t*0.9)*60, 40, w*0.8, h*0.8, Math.max(w,h));
+  grad2.addColorStop(0, 'rgba(139,92,246,0.06)');
+  grad2.addColorStop(0.5, 'rgba(139,92,246,0.01)');
+  grad2.addColorStop(1, 'transparent');
+  lctx.fillStyle = grad2;
+  lctx.fillRect(0,0,w,h);
+
+  requestAnimationFrame(drawLightBg);
+}
+drawLightBg();
+
+// ===== particles =====
+let particles = [];
 function initParticles(){
-  particles.length = 0;
-  for(let i=0;i<PARTICLE_COUNT;i++){
+  const count = Math.max(50, Math.round((innerWidth*innerHeight)/120000)); // responsive
+  particles = [];
+  for(let i=0;i<count;i++){
     particles.push({
-      x: Math.random()*p.width,
-      y: Math.random()*p.height,
-      r: Math.random()*1.8 + 0.6,
-      vx: (Math.random()-0.5)*0.6,
-      vy: (Math.random()-0.5)*0.6,
-      hue: 180 + Math.random()*120
+      x: Math.random()*pCanvas.width,
+      y: Math.random()*pCanvas.height,
+      r: Math.random()*2 + 0.4,
+      vx: (Math.random()-0.5)*0.25,
+      vy: (Math.random()-0.5)*0.25,
+      hue: 180 + Math.random()*120,
+      alpha: 0.08 + Math.random()*0.12
     });
   }
 }
 initParticles();
 
 function drawParticles(){
-  pCtx.clearRect(0,0,p.width,p.height);
-  // draw and link
-  for(let i=0;i<particles.length;i++){
-    const a = particles[i];
-    // move
-    a.x += a.vx;
-    a.y += a.vy;
-    if(a.x < -10) a.x = p.width + 10;
-    if(a.x > p.width + 10) a.x = -10;
-    if(a.y < -10) a.y = p.height + 10;
-    if(a.y > p.height + 10) a.y = -10;
-
-    // draw
-    pCtx.beginPath();
-    pCtx.fillStyle = `hsla(${a.hue}, 90%, 60%, 0.08)`;
-    pCtx.arc(a.x, a.y, a.r, 0, Math.PI*2);
-    pCtx.fill();
-
-    // linking nearby
-    for(let j=i+1;j<particles.length;j++){
-      const b = particles[j];
-      const dx = a.x-b.x, dy = a.y-b.y;
-      const d = Math.hypot(dx,dy);
-      if(d < 120){
-        pCtx.beginPath();
-        pCtx.strokeStyle = `hsla(${(a.hue+b.hue)/2},90%,60%,${0.06 - d/2200})`;
-        pCtx.lineWidth = 0.8;
-        pCtx.moveTo(a.x,a.y); pCtx.lineTo(b.x,b.y); pCtx.stroke();
-      }
-    }
+  pctx.clearRect(0,0,pCanvas.width,pCanvas.height);
+  for(let p of particles){
+    pctx.beginPath();
+    pctx.fillStyle = `hsla(${p.hue},90%,60%,${p.alpha})`;
+    pctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    pctx.fill();
+    p.x += p.vx; p.y += p.vy;
+    // wrap
+    if(p.x < -10) p.x = pCanvas.width + 10;
+    if(p.x > pCanvas.width + 10) p.x = -10;
+    if(p.y < -10) p.y = pCanvas.height + 10;
+    if(p.y > pCanvas.height + 10) p.y = -10;
   }
   requestAnimationFrame(drawParticles);
 }
 drawParticles();
 
-/* Scroll reveal */
-const revealItems = document.querySelectorAll('.fade-in, .glass, .card, .section-title');
-const revealObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('reveal-on');
-  });
-},{threshold:0.15});
-revealItems.forEach(i=>revealObserver.observe(i));
-
-/* Type/rotator small UI */
-(function rotator(){
-  const root = document.querySelector('.type-rotator');
-  if(!root) return;
-  const phrases = Array.from(root.querySelectorAll('.rot-phrase')).map(s=>s.textContent);
-  let idx = 0;
-  const el = document.createElement('div');
-  el.className = 'rot-box';
-  root.innerHTML = '';
-  root.appendChild(el);
-  function show(){
-    el.textContent = phrases[idx];
-    el.style.opacity = 0;
-    el.style.transform = 'translateY(6px)';
-    requestAnimationFrame(()=>{ el.style.transition = 'all 400ms cubic-bezier(.2,.9,.3,1)'; el.style.opacity = 1; el.style.transform = 'translateY(0)'; });
-    setTimeout(()=>{
-      el.style.opacity = 0;
-      el.style.transform = 'translateY(-6px)';
-      setTimeout(()=>{ idx = (idx+1)%phrases.length; show(); }, 350);
-    }, 2200);
-  }
-  show();
-})();
-
-/* Resize handler for particles count */
-window.addEventListener('resize', ()=>{
-  fitCanvas(bg); fitCanvas(p);
-  initParticles();
+// ===== contact form (client side) =====
+document.getElementById('contactForm')?.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  // Simple client-side feedback — integrate backend or email service if needed
+  alert('Thanks — your message has been sent. We will contact you soon.');
+  e.target.reset();
 });
-
-/* helper used earlier */
-function fitCanvas(c){ c.width = innerWidth; c.height = innerHeight; }
