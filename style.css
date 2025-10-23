@@ -382,3 +382,161 @@ main {
   60% { transform: scale(1.2); opacity: 1; }
   100% { transform: scale(1); }
 }
+
+/* ===== Full Page Background Enhancement ===== */
+body {
+  background: url("hero-bg.jpg") no-repeat center top fixed;
+  background-size: cover;
+  background-color: #030712; /* fallback for slow load */
+}
+
+#home.hero {
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  border: none;
+  box-shadow: none;
+}
+/* ===== Improved Readability for Bright Backgrounds ===== */
+.section.glass {
+  background: rgba(0, 0, 0, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  color: #e8f1f7;
+}
+
+.section.glass h2,
+.section.glass h3,
+.section.glass h4 {
+  color: #00e0ff !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.section.glass p {
+  color: #d7e3ea !important;
+}
+
+.nav {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.hero .headline {
+  color: #ffffff;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.6);
+}
+
+.hero .lead {
+  color: #d7e3ea;
+}
+
+.btn.primary {
+  box-shadow: 0 0 20px rgba(0,224,255,0.4);
+}
+/* ===== Darker Glass + Clearer Text ===== */
+.section.glass {
+  background: rgba(0, 0, 0, 0.65) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+  color: #f2f7fa;
+}
+
+.section.glass h2,
+.section.glass h3,
+.section.glass h4 {
+  color: #00eaff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.section.glass p {
+  color: #dce9ef !important;
+}
+
+.nav {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero .headline {
+  color: #ffffff;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.7);
+}
+
+.hero .lead {
+  color: #d9e7ee;
+}
+
+.btn.primary {
+  box-shadow: 0 0 25px rgba(0,224,255,0.45);
+}
+/* ===== Hover Glow Effect on Glass Boxes ===== */
+.section.glass {
+  position: relative;
+  transition: all 0.4s ease-in-out;
+}
+
+.section.glass:hover {
+  border-color: rgba(0, 255, 255, 0.7);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.25),
+              0 0 50px rgba(0, 255, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Optional: smooth transition for buttons too */
+.btn.primary:hover {
+  background: linear-gradient(90deg, #00eaff, #0077ff);
+  box-shadow: 0 0 30px rgba(0, 224, 255, 0.55);
+  transform: scale(1.05);
+}
+/* ===== Responsive Design ===== */
+
+/* Mobile Devices (portrait) */
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hero-content {
+    padding: 40px 15px;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-content p {
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+
+  .section.glass {
+    width: 90%;
+    margin: 15px auto;
+    padding: 20px;
+  }
+
+  .services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px;
+  }
+}
